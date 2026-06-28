@@ -74,29 +74,6 @@ function ParticipantsPage() {
               className="pl-9"
             />
           </div>
-          <Select value={status} onValueChange={setStatus}>
-            <SelectTrigger className="w-full sm:w-40">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All status</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="idle">Idle</SelectItem>
-              <SelectItem value="offline">Offline</SelectItem>
-              <SelectItem value="disqualified">Disqualified</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={college} onValueChange={setCollege}>
-            <SelectTrigger className="w-full sm:w-48">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All colleges</SelectItem>
-              {colleges.map((c) => (
-                <SelectItem key={c} value={c}>{c}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
       </div>
 
