@@ -21,6 +21,14 @@ function SettingsPage() {
   const { state, dispatch } = useContest();
   const { config } = state;
 
+  const handleSave = () => {
+    dispatch({
+      type: "SET_CONFIG",
+      payload: { frozen: true },
+    });
+    toast.success("Settings saved");
+  };
+
   return (
     <div className="space-y-5">
       <PageHeader
@@ -29,37 +37,10 @@ function SettingsPage() {
       />
 
       <div className="surface-card p-5">
-        <ToggleRow
-          label="Test"
-          description="Test toggle"
-          checked={config.frozen}
-          onChange={(v) =>
-            dispatch({ type: "SET_CONFIG", payload: { frozen: v } })
-          }
-        />
+        <Button onClick={handleSave}>
+          Save changes
+        </Button>
       </div>
-    </div>
-  );
-}
-
-function ToggleRow({
-  label,
-  description,
-  checked,
-  onChange,
-}: {
-  label: string;
-  description: string;
-  checked: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-      <div className="min-w-0">
-        <div className="text-sm font-medium">{label}</div>
-        <div className="truncate text-xs text-muted-foreground">{description}</div>
-      </div>
-      <SimpleSwitch checked={checked} onChange={onChange} />
     </div>
   );
 }
