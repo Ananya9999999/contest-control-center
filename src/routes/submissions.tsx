@@ -4,13 +4,7 @@ import { useContest } from "@/lib/contest-store";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SimpleSelect } from "@/components/ui/simple-select";
 import { VerdictBadge } from "@/components/common/VerdictBadge";
 import { fmtRelative } from "@/lib/format";
 import { RefreshCcw, Search } from "lucide-react";
@@ -66,33 +60,33 @@ function SubmissionsPage() {
               className="pl-9"
             />
           </div>
-          <Select value={verdict} onValueChange={setVerdict}>
-            <SelectTrigger className="w-full md:w-36"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All verdicts</SelectItem>
-              {["AC","WA","TLE","RE","CE","MLE"].map((v) => (
-                <SelectItem key={v} value={v}>{v}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={problem} onValueChange={setProblem}>
-            <SelectTrigger className="w-full md:w-40"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All problems</SelectItem>
-              {state.problems.map((p) => (
-                <SelectItem key={p.id} value={p.id}>{p.code}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select value={lang} onValueChange={setLang}>
-            <SelectTrigger className="w-full md:w-36"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All languages</SelectItem>
-              {languages.map((l) => (
-                <SelectItem key={l} value={l}>{l}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <SimpleSelect
+            value={verdict}
+            onChange={setVerdict}
+            options={[
+              { value: "all", label: "All verdicts" },
+              ...["AC", "WA", "TLE", "RE", "CE", "MLE"].map((v) => ({ value: v, label: v })),
+            ]}
+            className="w-full md:w-36"
+          />
+          <SimpleSelect
+            value={problem}
+            onChange={setProblem}
+            options={[
+              { value: "all", label: "All problems" },
+              ...state.problems.map((p) => ({ value: p.id, label: p.code })),
+            ]}
+            className="w-full md:w-40"
+          />
+          <SimpleSelect
+            value={lang}
+            onChange={setLang}
+            options={[
+              { value: "all", label: "All languages" },
+              ...languages.map((l) => ({ value: l, label: l })),
+            ]}
+            className="w-full md:w-36"
+          />
         </div>
       </div>
 

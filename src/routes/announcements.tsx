@@ -5,13 +5,7 @@ import { PageHeader } from "@/components/common/PageHeader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SimpleSelect } from "@/components/ui/simple-select";
 import { Pin, PinOff, Trash2, Megaphone, AlertTriangle, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { fmtRelative } from "@/lib/format";
@@ -140,14 +134,15 @@ function AnnouncementsPage() {
             </div>
             <div>
               <label className="mb-1 block text-xs font-medium text-muted-foreground">Severity</label>
-              <Select value={severity} onValueChange={(v) => setSeverity(v as Announcement["severity"])}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="info">Info</SelectItem>
-                  <SelectItem value="warning">Warning</SelectItem>
-                  <SelectItem value="critical">Critical</SelectItem>
-                </SelectContent>
-              </Select>
+              <SimpleSelect
+                value={severity}
+                onChange={(v) => setSeverity(v as Announcement["severity"])}
+                options={[
+                  { value: "info", label: "Info" },
+                  { value: "warning", label: "Warning" },
+                  { value: "critical", label: "Critical" },
+                ]}
+              />
             </div>
             <Button onClick={publish} className="w-full">Broadcast</Button>
           </div>

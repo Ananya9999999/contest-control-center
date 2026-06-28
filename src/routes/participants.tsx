@@ -4,13 +4,7 @@ import { useContest } from "@/lib/contest-store";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SimpleSelect } from "@/components/ui/simple-select";
 import { Badge } from "@/components/ui/badge";
 import { Search, UserX, UserCheck } from "lucide-react";
 import type { Participant } from "@/lib/mock-data";
@@ -74,6 +68,27 @@ function ParticipantsPage() {
               className="pl-9"
             />
           </div>
+          <SimpleSelect
+            value={status}
+            onChange={setStatus}
+            options={[
+              { value: "all", label: "All status" },
+              { value: "active", label: "Active" },
+              { value: "idle", label: "Idle" },
+              { value: "offline", label: "Offline" },
+              { value: "disqualified", label: "Disqualified" },
+            ]}
+            className="w-full sm:w-40"
+          />
+          <SimpleSelect
+            value={college}
+            onChange={setCollege}
+            options={[
+              { value: "all", label: "All colleges" },
+              ...colleges.map((c) => ({ value: c, label: c })),
+            ]}
+            className="w-full sm:w-48"
+          />
         </div>
       </div>
 
@@ -100,10 +115,12 @@ function ParticipantsPage() {
               <div className="hidden font-mono text-xs tabular-nums md:block">Y{p.year}</div>
               <div className="hidden font-mono text-xs tabular-nums md:block">{p.rating}</div>
               <div>
-                <span className={"inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] font-medium " + statusTone[p.status]}>
+                <Badge
+                  className={"gap-1.5 " + statusTone[p.status]}
+                >
                   <span className="h-1.5 w-1.5 rounded-full bg-current" />
                   {p.status}
-                </span>
+                </Badge>
               </div>
               <div className="flex shrink-0 justify-end gap-1">
                 {p.status === "disqualified" ? (
