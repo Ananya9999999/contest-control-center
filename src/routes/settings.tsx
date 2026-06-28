@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useContest } from "@/lib/contest-store";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+import { SimpleSwitch } from "@/components/ui/simple-switch";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -135,7 +135,7 @@ function ToggleRow({
         <div className="text-sm font-medium">{label}</div>
         <div className="truncate text-xs text-muted-foreground">{description}</div>
       </div>
-      <Switch checked={checked} onCheckedChange={onChange} />
+      <SimpleSwitch checked={checked} onChange={onChange} />
     </div>
   );
 }
