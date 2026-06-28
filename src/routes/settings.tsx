@@ -19,14 +19,32 @@ function SettingsPage() {
         description="Operational controls for the live contest."
       />
       <div className="surface-card p-5">
-        <ToggleRow
-          label="Submissions enabled"
-          description="Participants can submit code."
-          checked={config.submissionsEnabled}
-          onChange={(v) =>
-            dispatch({ type: "SET_CONFIG", payload: { submissionsEnabled: v } })
-          }
-        />
+        <h3 className="text-sm font-semibold">Operational controls</h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Toggle real-time behaviors of the contest engine.
+        </p>
+        <div className="mt-4 space-y-4">
+          <ToggleRow
+            label="Submissions enabled"
+            description="Participants can submit code."
+            checked={config.submissionsEnabled}
+            onChange={(v) =>
+              dispatch({ type: "SET_CONFIG", payload: { submissionsEnabled: v } })
+            }
+          />
+          <ToggleRow
+            label="Freeze scoreboard"
+            description="Hide rank changes during the final stretch."
+            checked={config.frozen}
+            onChange={(v) => dispatch({ type: "SET_CONFIG", payload: { frozen: v } })}
+          />
+          <ToggleRow
+            label="Pause contest"
+            description="Stops the clock and the live submission stream."
+            checked={config.paused}
+            onChange={(v) => dispatch({ type: "SET_CONFIG", payload: { paused: v } })}
+          />
+        </div>
       </div>
     </div>
   );
