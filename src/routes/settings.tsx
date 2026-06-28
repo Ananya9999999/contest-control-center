@@ -7,18 +7,9 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const Route = createFileRoute("/settings")({
-  head: () => ({
-    meta: [
-      { title: "Settings · Contest Control Center" },
-      { name: "description", content: "Configure contest name, duration, freeze, and submission gating." },
-    ],
-  }),
-  component: SettingsPage,
-});
-
 function SettingsPage() {
-  const { state } = useContest();
+  const { state, dispatch } = useContest();
+  const { config } = state;
 
   return (
     <div className="space-y-5">
@@ -29,7 +20,15 @@ function SettingsPage() {
 
       <div className="surface-card p-5">
         <h3 className="text-sm font-semibold">General</h3>
-        <Button onClick={() => toast.success("Clicked!")}>
+        <Button
+          onClick={() => {
+            dispatch({
+              type: "SET_CONFIG",
+              payload: { frozen: true },
+            });
+            toast.success("Settings saved");
+          }}
+        >
           Save changes
         </Button>
       </div>
