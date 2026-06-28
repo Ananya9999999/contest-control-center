@@ -17,48 +17,47 @@ function SettingsPage() {
   const [name, setName] = useState(config.name);
   const [durationHrs, setDurationHrs] = useState(config.durationMs / 3_600_000);
 
-  return (
+ return (
     <div className="space-y-5">
       <PageHeader
         title="Contest settings"
         description="Operational controls for the live contest."
       />
 
-      <div className="grid gap-5 md:grid-cols-2">
-        <div className="surface-card p-5">
-          <h3 className="text-sm font-semibold">General</h3>
-          <p className="mt-1 text-xs text-muted-foreground">Display and timing configuration.</p>
-          <div className="mt-4 space-y-4">
-            <div>
-              <label className="mb-1 block text-xs font-medium text-muted-foreground">Contest name</label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-medium text-muted-foreground">Duration (hours)</label>
-              <Input
-                type="number"
-                min={0.5}
-                step={0.5}
-                value={durationHrs}
-                onChange={(e) => setDurationHrs(parseFloat(e.target.value) || 0)}
-              />
-            </div>
-            <Button
-              onClick={() => {
-                dispatch({
-                  type: "SET_CONFIG",
-                  payload: { name, durationMs: durationHrs * 3_600_000 },
-                });
-                toast.success("Settings saved");
-              }}
-            >
-              Save changes
-            </Button>
+      <div className="surface-card p-5">
+        <h3 className="text-sm font-semibold">General</h3>
+        <p className="mt-1 text-xs text-muted-foreground">Display and timing configuration.</p>
+        <div className="mt-4 space-y-4">
+          <div>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">Contest name</label>
+            <Input value={name} onChange={(e) => setName(e.target.value)} />
           </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">Duration (hours)</label>
+            <Input
+              type="number"
+              min={0.5}
+              step={0.5}
+              value={durationHrs}
+              onChange={(e) => setDurationHrs(parseFloat(e.target.value) || 0)}
+            />
+          </div>
+          <Button
+            onClick={() => {
+              dispatch({
+                type: "SET_CONFIG",
+                payload: { name, durationMs: durationHrs * 3_600_000 },
+              });
+              toast.success("Settings saved");
+            }}
+          >
+            Save changes
+          </Button>
         </div>
+      </div>
 
-        <div className="surface-card p-5">
-          <h3 className="text-sm font-semibold">Operational controls</h3>
+      <div className="surface-card p-5">
+        <h3 className="text-sm font-semibold">Operational controls</h3>
           <p className="mt-1 text-xs text-muted-foreground">
             Toggle real-time behaviors of the contest engine.
           </p>
@@ -83,8 +82,7 @@ function SettingsPage() {
               checked={config.paused}
               onChange={(v) => dispatch({ type: "SET_CONFIG", payload: { paused: v } })}
             />
-          </div>
-        </div>
+            </div>
       </div>
     </div>
   );
