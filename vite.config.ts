@@ -13,4 +13,7 @@ export default defineConfig({
     alias: { "@": "/src" },
     tsconfigPaths: true, 
   },
+  build: {
+    minify: false,
+  },
 });
